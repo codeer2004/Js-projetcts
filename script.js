@@ -1,82 +1,75 @@
-//starting//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 let computerChoice, 
     userChoice,
     userScore = 0,
     computerScore = 0;
-    
-//getting the computer choice
+   
 function getComputerChoice() {
-    let getChoice = Math.random().toFixed(2);
-    let Choice = (getChoice.toString()).at(-1);
-    // console.log(Choice);
-    Choice = Number(Choice);
-    // console.log(Choice);
-    if (Choice >= 0 && Choice <= 2) {
+
+    let randomChosenNumber = Math.random().toFixed(2);
+    let lastNumberDigit  = (randomChosenNumber.toString()).at(-1); //since the number is decimal, its string version will help getting the last digit
+    lastNumberDigit  = Number(lastNumberDigit );
+
+    if (lastNumberDigit  >= 0 && lastNumberDigit  <= 2) {
         computerChoice = "rock";
-    } else if (Choice >= 3 && Choice <= 5) {
+    } else if (lastNumberDigit  >= 3 && lastNumberDigit  <= 5) {
         computerChoice = "paper";
-    } else if (Choice >= 6 && Choice <= 9) {
+    } else if (lastNumberDigit  >= 6 && lastNumberDigit  <= 9) {
         computerChoice = "scissors";
     }
     return computerChoice;
 }
-// console.log(getComputerChoice());
-
-//getting the user choice
 
 function getUserChoice() {
-    let ask = prompt("what do you choose I have already chosen! XD");
-    let Choice = ask.toLowerCase();
-    while (Choice !== "rock" && Choice !== "paper" && Choice !== "scissors") {
-        ask = prompt("OOPS! invalid choice try again! :(");
-        Choice = ask.toLowerCase();
+
+    let userChoice = prompt("what do you choose I have already chosen! XD");
+    let userChoiceLowerCase = userChoice.toLowerCase();
+
+    while (userChoiceLowerCase !== "rock" && userChoiceLowerCase !== "paper" && userChoiceLowerCase !== "scissors") {
+        userChoice = prompt("OOPS! invalid choice try again! :(");
+        userChoiceLowerCase = userChoice.toLowerCase();
     }
-    userChoice = Choice;
+
 return userChoice;
 }
 
-// console.log(getUserChoice());
-//round logic
-function play(computer, user){
-    if (computer === "paper" && user === "rock"){
-        console.log("You lose this round!  paper beats rock !!!!")
+function playOneRound(computer_choice, user_choice){
+    if (computer_choice === "paper" && user_choice === "rock"){
+        console.log("You lose this round!  paper beats rock !!!!");
         computerScore++;
-    } else if (computer === "paper" && user === "scissors"){
-        console.log("You win this round!! scissors beats paper")
+    } else if (computer_choice === "paper" && user_choice === "scissors"){
+        console.log("You win this round!! scissors beats paper");
         userScore++;
-    } else if (computer === "rock" && user === "paper"){
-        console.log("You win this round!! scissors beats paper")
+    } else if (computer_choice === "rock" && user_choice === "paper"){
+        console.log("You win this round!! paper beats rock");
         userScore++;
-    } else if (computer === "scissors" && user === "paper"){
-        console.log("You lose this round!! scissors beats paper")
+    } else if (computer_choice === "scissors" && user_choice === "paper"){
+        console.log("You lose this round!! scissors beats paper");
         computerScore++;
-    } else if (computer === "scissors" && user === "rock"){
-        console.log("You win this round!! scissors beats paper")
+    } else if (computer_choice === "scissors" && user_choice === "rock"){
+        console.log("You win this round!! rock beats scissors");
         userScore++;
-    } else if (computer === "rock" && user === "scissors") {
-        console.log("You lose this round!! scissors beats paper")
+    } else if (computer_choice === "rock" && user_choice === "scissors") {
+        console.log("You lose this round!! rock beats scissors");
         computerScore++;
-    } else if (computer === "rock" && user === "rock") {
-        console.log("Nobody won TIE!!!!!")
-    } else if (computer === "scissors" && user === "scissors") {
-        console.log("Nobody won TIE!!!!!")
+    } else if (computer_choice === "rock" && user_choice === "rock") {
+        console.log("Same choice, nobody won TIE!!!!!");
+    } else if (computer_choice === "scissors" && user_choice === "scissors") {
+        console.log("Same choice, nobody won TIE!!!!!");
     } else  {
-        console.log("Nobody won TIE!!!!!")
+        console.log("Same choice, nobody won TIE!!!!!");
     }
 }
-    
+console.log("Play with me rock, scissors and paper XD\n HERE WE GOOOOO\n")    
 for( let i = 0; i < 5; i++){
-    getComputerChoice();
-    getUserChoice()
-    play(getComputerChoice, getUserChoice);
-    console.log("ready for the next round, let's start!!")
-}
+   
+    playOneRound(getComputerChoice(), getUserChoice());
 
+}
+console.log("Game is over\n Your score : "+userScore+" \n My score : "+computerScore+" \n SO :\n");
 if(computerScore > userScore){
     console.log("I won yaho!!");
 } else {
-    console.log("You won ! try me with another round hmmm Xb");
+    console.log(" SHOOOOT!!!!!! You won ! try me with another round hmmm Xb");
 }
         
         
